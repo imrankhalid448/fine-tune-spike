@@ -1,10 +1,29 @@
-# Personal Model Fine-Tuning Spike
+# Fine-Tune Spike — Audio & ML Evaluation Harness
 
-A FastAPI-based backend for uploading audio (.wav) and transcript (.txt) files, validating them, running a simulated fine-tuning job, tracking progress, and managing model versions.
+> *Systematic FastAPI + Librosa + Scikit-learn fine-tuning and evaluation spike with automated API tests.*
 
-## Setup Instructions (≤3 Minutes)
+## Problem Statement
+Off-the-shelf audio and ML models underperform on domain-specific acoustic classification tasks without structured feature extraction, fine-tuning, and quantitative error analysis.
 
-1. **Clone the repository** (or unzip the submission):
-   ```bash
-   git clone <repo-url>
-   cd fine_tune_spike
+## Architecture
+
+```mermaid
+flowchart LR
+    Audio["Audio Input (.wav)"] --> Librosa["Librosa Feature Extraction"]
+    Librosa --> Train["Scikit-learn Model Training & Tuning"]
+    Train --> Eval["Confusion Matrix & Metrics (Seaborn/Matplotlib)"]
+    Train --> API["FastAPI Inference Service"]
+    API --> Tests["Pytest + HTTPX Async Test Suite"]
+```
+
+## Tech Stack
+- **API & Testing:** FastAPI, Uvicorn, Pytest, `pytest-asyncio`, HTTPX
+- **Audio & ML:** Librosa, SoundFile, Scikit-learn, NumPy
+- **Visualization & Storage:** Matplotlib, Seaborn, SQLite
+
+## Quick Start
+```bash
+pip install -r requirements.txt
+pytest -v
+uvicorn main:app --reload
+```
