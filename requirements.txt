@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pytest
+pytest-asyncio
+httpx
+python-multipart
+librosa
+soundfile
+numpy
+matplotlib
+scikit-learn
+seaborn
+sqlite3
